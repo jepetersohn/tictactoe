@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "webpack-watch": "webpack -w",
+    "express-server": "node ./server",
+    "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,12 +14,13 @@
     "url": "git+https://github.com/jepetersohn/tictactoe.git"
   },
   "author": "Joan Petersohn",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jepetersohn/tictactoe/issues"
   },
   "homepage": "https://github.com/jepetersohn/tictactoe#readme",
   "dependencies": {
+    "babel-loader": "^6.4.1",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
@@ -24,6 +28,13 @@
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.24.0",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "webpack": "^2.3.2"
+  },
+  "devDependencies": {
+    "concurrently": "^3.4.0",
+    "webpack": "^2.1.0-beta.22"
   }
 }
