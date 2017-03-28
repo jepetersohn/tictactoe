@@ -9,9 +9,9 @@ ReactDOM.render(
 ReactDOM.render(
   <table>
     <tr>
-        <td class="top"></td>
-        <td class="top"></td>
-        <td class="top"></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
     <tr>
         <td></td>

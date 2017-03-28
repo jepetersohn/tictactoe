@@ -93,9 +93,9 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(
         'tr',
         null,
-        _react2.default.createElement('td', { 'class': 'top' }),
-        _react2.default.createElement('td', { 'class': 'top' }),
-        _react2.default.createElement('td', { 'class': 'top' })
+        _react2.default.createElement('td', null),
+        _react2.default.createElement('td', null),
+        _react2.default.createElement('td', null)
     ),
     _react2.default.createElement(
         'tr',
