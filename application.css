@@ -1,0 +1,26 @@
+td {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  height: 100px;
+  width: 100px;
+}
+
+table {
+   text-align: center;
+   margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+td.active_x {
+  background-color: red;
+}
+
+td.active_o {
+  background-color: blue;
+}
+

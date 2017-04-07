@@ -21724,10 +21724,36 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(
-  'h1',
-  null,
-  'Tic Tac Toe'
+    'h1',
+    null,
+    'Tic Tac Toe'
 ), document.getElementById('root'));
+
+_reactDom2.default.render(_react2.default.createElement(
+    'table',
+    null,
+    _react2.default.createElement(
+        'tr',
+        null,
+        _react2.default.createElement('td', null),
+        _react2.default.createElement('td', null),
+        _react2.default.createElement('td', null)
+    ),
+    _react2.default.createElement(
+        'tr',
+        null,
+        _react2.default.createElement('td', null),
+        _react2.default.createElement('td', null),
+        _react2.default.createElement('td', null)
+    ),
+    _react2.default.createElement(
+        'tr',
+        null,
+        _react2.default.createElement('td', null),
+        _react2.default.createElement('td', null),
+        _react2.default.createElement('td', null)
+    )
+), document.getElementById('board'));
 
 /***/ }
 /******/ ]);
