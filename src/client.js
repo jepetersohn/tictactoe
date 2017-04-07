@@ -26,3 +26,4 @@ ReactDOM.render(
 </table>,
   document.getElementById('board')
 );
+
