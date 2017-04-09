@@ -16,11 +16,6 @@ h1 {
   text-align: center;
 }
 
-td.active_x {
-  background-color: red;
+td {
+  font-size: 50px;
 }
-
-td.active_o {
-  background-color: blue;
-}
-
