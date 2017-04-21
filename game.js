@@ -1,7 +1,7 @@
 $(document).ready(function() {
   handleClick();
   updateCell();
-  winner();
+  checkWinner();
 });
 
 var handleClick = function() {
@@ -15,18 +15,17 @@ var handleClick = function() {
     else if (i === 0){
       updateCell(clickedCell, "playerX");
       clickedCell.addClass("clicked X");
-        if ((clickedCell).closest("tr").find(".X").size() === 3) {
-          alert("winner!")};
       i++;
     } else {
       updateCell(clickedCell, "playerO");
       clickedCell.addClass("clicked O");
     i = 0;
   }
-
-    if (winner()) {
-      alert("game over");
-    }
+    let playerSymbol = (i==1) ? "X" : "O";
+    if (checkWinner(playerSymbol)) {
+      alert("PLAYER " + playerSymbol + " WINS!");
+    } else if (isGameOverNoWinner())
+      alert("It's a draw");
   });
 };
 
@@ -38,10 +37,28 @@ var updateCell = function(cell, player) {
   }
 };
 
-var winner = function() {
-  return checkRow();
+var checkWinner = function(playerSymbol) {
+  return checkRow(playerSymbol) ||
+    checkColumn(playerSymbol) ||
+    checkDiags(playerSymbol);
 }
 
-var checkRow = function() {
-  return false;
+var checkDiags = function(playerSymbol) {
+  return ($("td.diag1." + playerSymbol).size() == 3) ||
+    ($("td.diag2." + playerSymbol).size() == 3);
+}
+
+var checkColumn = function(playerSymbol) {
+  return ($("td.col1." + playerSymbol).size() == 3) ||
+    ($("td.col2." + playerSymbol).size() == 3) ||
+      ($("td.col3." + playerSymbol).size() == 3);
+}
+var checkRow = function(playerSymbol) {
+    return ($("td.row1." + playerSymbol).size() == 3) ||
+    ($("td.row2." + playerSymbol).size() == 3) ||
+      ($("td.row3." + playerSymbol).size() == 3);
+}
+
+var isGameOverNoWinner = function() {
+  return $("td.clicked").size() == 9 && !(checkWinner == false);
 }
