@@ -7,18 +7,35 @@ $(document).ready(function() {
 var handleClick = function() {
   var clickedCell;
   var i = 0;
+  var boardState = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   $("td").on("click", function(event) {
     clickedCell = $(this);
     if ($(this).closest('td').hasClass("clicked")) {
         alert("Pick a different space.")
       }
     else if (i === 0){
+      cellId = clickedCell.attr('id');
       updateCell(clickedCell, "playerX");
       clickedCell.addClass("clicked X");
       i++;
+      for (n = 0; n < boardState.length; n++) {
+        if (boardState[n] == cellId) {
+            boardState[n] = "X";
+          }
+        }
     } else {
       updateCell(clickedCell, "playerO");
       clickedCell.addClass("clicked O");
+      // data = boardState;
+      var request = $.ajax({
+        type: 'GET',
+        url: 'http://localhost:5000/game',
+        contentType: 'application/json;charset=UTF-8',
+        data: {'data': boardState.join('')},
+      });
+      request.done(function(response){
+        console.log(response);
+      })
     i = 0;
   }
     let playerSymbol = (i==1) ? "X" : "O";
