@@ -2,32 +2,62 @@ $(document).ready(function() {
   handleClick();
   updateCell();
   checkWinner();
+  notifyWinner();
+  getBoardState();
 });
+
+var getBoardState = function() {
+  var boardState = $('*[id]').map(function() {
+    return this.id;
+  }).get();
+  return boardState
+}
 
 var handleClick = function() {
   var clickedCell;
   var i = 0;
+  var boardState = getBoardState();
   $("td").on("click", function(event) {
     clickedCell = $(this);
     if ($(this).closest('td').hasClass("clicked")) {
         alert("Pick a different space.")
       }
     else if (i === 0){
+      cellId = clickedCell.attr('id');
       updateCell(clickedCell, "playerX");
       clickedCell.addClass("clicked X");
       i++;
-    } else {
-      updateCell(clickedCell, "playerO");
-      clickedCell.addClass("clicked O");
-    i = 0;
-  }
-    let playerSymbol = (i==1) ? "X" : "O";
-    if (checkWinner(playerSymbol)) {
-      alert("PLAYER " + playerSymbol + " WINS!");
-    } else if (isGameOverNoWinner())
-      alert("It's a draw");
+      for (n = 0; n < boardState.length; n++) {
+        if (boardState[n] == cellId) {
+            boardState[n] = "X";
+            clickedCell.attr('id', 'X');
+          }
+        }
+      notifyWinner(i);
+      askFlask(boardState);
+      notifyWinner(i = 0);
+    }
   });
 };
+
+var askFlask = function(boardState) {
+      // updateCell(clickedCell, "playerO");
+      // clickedCell.addClass("clicked O");
+      data = boardState.join('');
+      var request = $.ajax({
+        type: 'GET',
+        url: 'http://localhost:5000/game?board=' + data,
+        success: function(response){
+          handleResponse(response);
+          },
+        error: function() {
+            alert('Error occured');
+          },
+      });
+      request.done(function(response){
+        return(response);
+      })
+  }
 
 var updateCell = function(cell, player) {
   if (player === "playerX") {
@@ -35,7 +65,24 @@ var updateCell = function(cell, player) {
   } else if (player === "playerO") {
     cell.closest('td').text("O");
   }
-};
+}
+
+var handleResponse = function(newBoardState) {
+  console.log(newBoardState)
+  // take each element of the newBoardState and set it as the data-id in the html
+}
+
+var resetBoard = function(){
+
+}
+
+var notifyWinner = function(player) {
+  let playerSymbol = (player==1) ? "X" : "O";
+  if (checkWinner(playerSymbol)) {
+    alert("PLAYER " + playerSymbol + " WINS!");
+  } else if (isGameOverNoWinner())
+    alert("It's a draw");
+}
 
 var checkWinner = function(playerSymbol) {
   return checkRow(playerSymbol) ||
